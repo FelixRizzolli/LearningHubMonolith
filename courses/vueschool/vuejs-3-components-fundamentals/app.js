@@ -1,5 +1,5 @@
-const PlanComponent = {
-    template: '#plan-template',
+const PlanPickerItemComponent = {
+    template: '#plan-picker-item-template',
 
     props: {
         name: {
@@ -40,7 +40,7 @@ const PlanPickerComponent = {
     },
 
     components: {
-        Plan: PlanComponent
+        PlanPickerItem: PlanPickerItemComponent
     },
 }
 
