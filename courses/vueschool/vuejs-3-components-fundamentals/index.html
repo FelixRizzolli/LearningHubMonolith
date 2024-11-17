@@ -7,20 +7,30 @@
     <title>Vue.js Components Fundamentals</title>
 </head>
 <body>
+    <div id="app" class="container mx-auto py-6">
+        <div class="content">
+            <h1 class="title">Coffee Plans</h1>
+            <h2 class="subtitle">
+                We travel the world to source the very best single origin coffee for you
+            </h2>
+            <div class="plans">
+                <plan v-for="myPlan in plans" :name="myPlan"></plan>
+            </div>
+        </div>
+    </div>
 
-<div id="app">
-    <h1>Vue.js Components Fundamentals</h1>
-    <click-counter></click-counter>
-    <click-counter></click-counter>
-    <click-counter></click-counter>
-    <click-counter></click-counter>
-</div>
+    <script type="text/x-template" id="plan-template">
+        <div class="plan">
+            <div class="description">
+                <span class="title">
+                  {{name}}
+                </span>
+            </div>
+        </div>
+    </script>
 
-<script type="text/x-template" id="click-counter-template">
-    <button @click="count++">the count is: {{count}}</button>
-</script>
-<script src="https://unpkg.com/vue@3"></script>
-<script src="app.js"></script>
-
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="style.css">
 </body>
 </html>
