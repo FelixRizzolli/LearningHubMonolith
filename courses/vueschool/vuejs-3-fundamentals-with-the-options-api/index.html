@@ -33,6 +33,7 @@
     </label>
 
     <button
+      :disabled="newItem.length < 5"
       @click="saveItem"
       class="btn btn-primary"
     >
