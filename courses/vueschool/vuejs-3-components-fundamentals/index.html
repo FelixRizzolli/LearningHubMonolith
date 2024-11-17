@@ -7,35 +7,42 @@
     <title>Vue.js Components Fundamentals</title>
 </head>
 <body>
-    <div id="app" class="container mx-auto py-6">
-        <div class="content">
-            <h1 class="title">Coffee Plans</h1>
-            <h2 class="subtitle">
-                We travel the world to source the very best single origin coffee for you
-            </h2>
-        </div>
-
-        <plan-picker></plan-picker>
+<div id="app" class="container mx-auto py-6">
+    <div class="content">
+        <h1 class="title">Coffee Plans</h1>
+        <h2 class="subtitle">
+            We travel the world to source the very best single origin coffee for you
+        </h2>
     </div>
 
-    <script type="text/x-template" id="plan-picker-template">
-        <div class="plans">
-            <plan v-for="myPlan in plans" :name="myPlan"></plan>
-        </div>
-    </script>
+    <plan-picker></plan-picker>
+</div>
 
-    <script type="text/x-template" id="plan-template">
-        <div class="plan">
-            <div class="description">
+<script type="text/x-template" id="plan-picker-template">
+    <div class="plans">
+        <plan
+                v-for="plan in plans"
+                :name="plan"
+                :selected="plan === selectedPlan"
+                v-on:select="selectPlan"
+        >
+
+        </plan>
+    </div>
+</script>
+
+<script type="text/x-template" id="plan-template">
+    <div class="plan" :class="{'active-plan': selected}" @click="select">
+        <div class="description">
                 <span class="title">
                   {{name}}
                 </span>
-            </div>
         </div>
-    </script>
+    </div>
+</script>
 
-    <script src="https://unpkg.com/vue@3"></script>
-    <script src="app.js"></script>
-    <link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/vue@3"></script>
+<script src="app.js"></script>
+<link rel="stylesheet" href="style.css">
 </body>
 </html>

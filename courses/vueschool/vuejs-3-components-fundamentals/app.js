@@ -1,16 +1,27 @@
-
 const PlanComponent = {
     template: '#plan-template',
+
     props: {
         name: {
             type: String,
             required: true,
         },
-    }
+        selected: {
+            type: Boolean,
+            default: false,
+        },
+    },
+
+    methods: {
+        select() {
+            this.$emit('select', this.name);
+        }
+    },
 }
 
 const PlanPickerComponent = {
     template: '#plan-picker-template',
+
     data() {
         return {
             plans: [
@@ -18,8 +29,16 @@ const PlanPickerComponent = {
                 'The Curious',
                 'The Addict',
             ],
+            selectedPlan: null,
         };
     },
+
+    methods: {
+        selectPlan(plan) {
+            this.selectedPlan = plan;
+        },
+    },
+
     components: {
         Plan: PlanComponent
     },
