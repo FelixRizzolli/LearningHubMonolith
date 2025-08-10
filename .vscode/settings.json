@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.endOfLine": "lf",
+    "prettier.useTabs": false,
+    "prettier.tabWidth": 4
+}
