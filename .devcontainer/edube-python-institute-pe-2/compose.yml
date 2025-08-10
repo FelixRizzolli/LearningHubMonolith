@@ -8,10 +8,10 @@ services:
               required: true
         volumes:
             # Mount the project directory to the container
-            - ../../courses/edube/python-institute/pe-2:/workspace
+            - ../../:/workspace
         networks:
             - default
-        command: ['sleep', 'infinity']
+        command: ["sleep", "infinity"]
 
 networks:
     default:
