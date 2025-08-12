@@ -16,9 +16,10 @@ During this course, we looked at the `Calendar` class a bit. Your task is to ext
 
 Use the following tips:
 
-Create a class called `MyCalendar` that extends the `Calendar` class;
-create the `count_weekday_in_year` method with the year and weekday parameters. The weekday parameter should be a value between 0-6, where 0 is Monday and 6 is Sunday. The method should return the number of days as an integer;
-in your implementation, use the `monthdays2calendar` method of the `Calendar` class.
+- Create a class called `MyCalendar` that extends the `Calendar` class;
+- create the `count_weekday_in_year` method with the year and weekday parameters. The weekday parameter should be a value between 0-6, where 0 is Monday and 6 is Sunday. The method should return the number of days as an integer;
+- in your implementation, use the `monthdays2calendar` method of the `Calendar` class.
+
 The following are the expected results:
 
 **Sample arguments**
