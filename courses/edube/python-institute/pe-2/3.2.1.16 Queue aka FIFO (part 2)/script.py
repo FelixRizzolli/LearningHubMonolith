@@ -1,17 +1,24 @@
-class QueueError(???):
+
+class QueueError(Exception):
     pass
 
 
 class Queue:
-    #
-    # Code from the previous lab.
-    #
+    def __init__(self):
+        self.__storage = []
+
+    def put(self, elem):
+        self.__storage.insert(0, elem)
+
+    def get(self):
+        if not self.__storage:
+            raise QueueError("Queue is empty")
+        return self.__storage.pop()
 
 
 class SuperQueue(Queue):
-    #
-    # Write new code here.
-    #
+    def isempty(self):
+        return len(self._Queue__storage) == 0
 
 
 que = SuperQueue()
