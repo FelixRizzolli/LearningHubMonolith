@@ -3,29 +3,20 @@ import math
 
 class Point:
     def __init__(self, x=0.0, y=0.0):
-        #
-        # Write code here
-        #
+        self.__x = float(x)
+        self.__y = float(y)
 
     def getx(self):
-        #
-        # Write code here
-        #
+        return self.__x
 
     def gety(self):
-        #
-        # Write code here
-        #
+        return self.__y
 
     def distance_from_xy(self, x, y):
-        #
-        # Write code here
-        #
+        return math.hypot(self.__x - x, self.__y - y)
 
     def distance_from_point(self, point):
-        #
-        # Write code here
-        #
+        return math.hypot(self.__x - point.getx(), self.__y - point.gety())
 
 
 point1 = Point(0, 0)
