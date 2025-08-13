@@ -1,24 +1,18 @@
-class QueueError(???):  # Choose base class for the new exception.
-    #
-    #  Write code here
-    #
+class QueueError(Exception):
+    pass
 
 
 class Queue:
     def __init__(self):
-        #
-        # Write code here
-        #
+        self.__storage = []
 
     def put(self, elem):
-        #
-        # Write code here
-        #
+        self.__storage.insert(0, elem)  # Add to the beginning of the list.
 
     def get(self):
-        #
-        # Write code here
-        #
+        if not self.__storage:
+            raise QueueError("Queue is empty")
+        return self.__storage.pop()  # Remove from the end of the list.
 
 
 que = Queue()
