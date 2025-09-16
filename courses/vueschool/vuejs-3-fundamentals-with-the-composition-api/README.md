@@ -45,14 +45,14 @@
   <ul>
     <!-- 
         To help Vue know when to re-render which items, it's always recommended to add the key attribute to loops.
-        The key attribute should be set to some unique ID per item (such as an id from a database).
-        This isn't always absolutely necessary for simpler arrays but it's still a good practice.
+        The key attribute should be set to a unique ID per item (such as an id from a database).
+        This isn't always absolutely necessary for simple arrays but it's still a good practice.
 
         ----
 
         Note:
         You might be tempted to use the index as the key. But this is actually what Vue does by default anyway 
-        under the hood, so really it's the exact same thing as not providing a key at all. And worse, it gives you
+        under the hood, so really it's the exact same thing as not providing a key at all. Worse, it gives you
         the false security that you have provided a key when you actually haven't. 
         
         ----
@@ -66,7 +66,7 @@
 
         ----
 
-        v-for is reactive as well. If we push an item to the items array then the loop will automatically 
+        v-for is reactive as well. If we push an item to the items array, the loop will automatically 
         update and the item will be included on the page. Likewise for remove.
      -->
     <li v-for="({ id, label }, index) in items" :key="id">
@@ -79,10 +79,10 @@
 ## Lesson 4
 
 - `v-model` can also take modifiers. Modifiers can alter the behavior of the model and are defined by adding a period followed by the modifier name.
-  - `v-model.lazy="item"` updates the item only after the input loses focus (on blur)
-  - `v-model.number="item"` casts the data to a number
-  - `v-model.trim="item"` automatically removes any surrounding white space from your data
-- `v-model` can also be used with textareas, selects, checkboxes, radio buttons, and more
+  - `v-model.lazy="item"` updates the item only after the input loses focus (on blur).
+  - `v-model.number="item"` casts the data to a number.
+  - `v-model.trim="item"` automatically removes any surrounding white space from your data.
+- `v-model` can also be used with textareas, selects, checkboxes, radio buttons, and more.
 
 ## Lesson 5
 
@@ -91,15 +91,22 @@
   - Example: `<input v-on:keyup="handler" />` will call `handler` on any key release.
 - You can use key modifiers to listen for specific keys:
   - `v-on:keyup.enter` triggers the event only when the Enter key is pressed.
-  - Other key modifiers include `.esc`, `.tab`, `.space`, etc. (e.g., `v-on:keyup.esc`)
+  - Other key modifiers include `.esc`, `.tab`, `.space`, etc. (e.g., `v-on:keyup.esc`).
 - You can also use event modifiers to change the default behavior:
   - `v-on:submit.prevent` prevents the default form submission and allows you to handle the submit event in JavaScript.
 - `v-on` can be written as `@` as a short form (e.g., `@click`, `@keyup.enter`).
 
 ## Lesson 6
 
-- Inside of the `script` section, in order to access the value of some kind of reactive reference, you have to use the value property. The reason for this is, that vue uses proxies in order to create reactive data.
+- Inside the `script` section, in order to access the value of a reactive reference, you have to use the `.value` property. The reason for this is that Vue uses proxies to create reactive data.
 
 ## Lesson 7
 
-- `v-if`, `v-else-if` and `v-else` can be used to conditionally render components
+- `v-if`, `v-else-if`, and `v-else` can be used to conditionally render components.
+
+## Lesson 8
+
+- `v-bind` is used to dynamically bind one or more attributes, or a component prop, to an expression. The most common use is to bind the value of an attribute to a variable or computed value in your Vue instance.
+  - Example: `<img v-bind:src="imageUrl" />` will set the `src` attribute of the image to the value of `imageUrl`.
+- You can use the shorthand `:` for `v-bind`, so `<img :src="imageUrl" />` is equivalent.
+- `v-bind` can also be used to bind multiple attributes at once using an object: `<div v-bind="objectOfAttrs"></div>`

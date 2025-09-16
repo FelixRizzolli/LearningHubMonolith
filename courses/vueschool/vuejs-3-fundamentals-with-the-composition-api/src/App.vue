@@ -13,9 +13,9 @@ const saveItem = () => {
 };
 
 const doEdit = (e) => {
-    editing.value = e
-    newItem.value = ""
-}
+  editing.value = e;
+  newItem.value = "";
+};
 </script>
 
 <template>
@@ -30,7 +30,9 @@ const doEdit = (e) => {
       <input type="checkbox" v-model="newItemPriority" />
       High Priority
     </label>
-    <button class="btn btn-primary">Save Item</button>
+    <button :disabled="newItem.trim().length < 5" class="btn btn-primary">
+      Save Item
+    </button>
   </form>
   <ul>
     <li v-for="({ id, label }, index) in items" :key="id">
