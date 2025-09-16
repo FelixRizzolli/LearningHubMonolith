@@ -110,3 +110,22 @@
   - Example: `<img v-bind:src="imageUrl" />` will set the `src` attribute of the image to the value of `imageUrl`.
 - You can use the shorthand `:` for `v-bind`, so `<img :src="imageUrl" />` is equivalent.
 - `v-bind` can also be used to bind multiple attributes at once using an object: `<div v-bind="objectOfAttrs"></div>`
+
+## Lesson 9
+
+- `:class` is a special binding for dynamically setting the `class` attribute on an element.
+- There are several ways to use `:class`:
+  - **Object syntax (`{}`):**
+    - Example: `<div :class="{ active: isActive, 'text-danger': hasError }"></div>`
+    - The keys are class names, and the values are boolean expressions. The class is applied if the value is true.
+  - **Array syntax (`[]`):**
+    - Example: `<div :class="[activeClass, errorClass]"></div>`
+    - Each item in the array can be a string (class name) or an object (as in the object syntax above).
+  - **Static classes:**
+    - You can use the normal `class` attribute for static classes together with `:class` for dynamic ones.
+    - Example: `<div class="static-class" :class="{ active: isActive }"></div>`
+  - **Mixed array/object syntax:**
+    - You can mix array and object syntax inside the array.
+    - Example: `<div :class="['static-class', { active: isActive, error: hasError }]"></div>`
+    - This allows you to combine static and dynamic classes flexibly.
+
