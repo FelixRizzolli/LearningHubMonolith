@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/typescript-node:22
+FROM mcr.microsoft.com/devcontainers/typescript-node:24
 
 # Set bash as the default shell
 ENV SHELL=/bin/bash 
