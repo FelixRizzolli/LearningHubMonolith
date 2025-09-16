@@ -167,3 +167,11 @@
 - To get a ref for a property of a reactive object, use the `toRef` or `toRefs` helper functions.
 - Caveat: `reactive` does not work with class instances or non-plain objects as expected; use plain objects for best results.
 - Note: `ref` does not provide deep reactivity for objects or arrays. When you use `ref` with an object or array, only the reference is reactive (shallow reactivity). Nested changes are not tracked unless you use `reactive` or access the object through `.value` and ensure reactivity manually. Use `reactive` if you need deep reactivity for complex data structures.
+
+## Lesson 12
+
+- To start a new Vue project locally, you need Node.js installed. Use the command `npm init vue@3` in your terminal to bootstrap a project with Vite.
+- The setup tool will guide you through configuration options (e.g., TypeScript, JSX, Cypress, ESLint). You can skip features you don't need.
+- Vite is a fast build tool that provides a great developer experience for Vue projects.
+- The main component file (e.g., `App.vue`) contains script, template, and optional style sections. These are called single file components.
+- For advanced setups, you can use Vue via CDN without a build step, but this limits features like `<script setup>`. Using Vite and the Composition API is recommended for most projects.
