@@ -7,6 +7,10 @@
         {
             "name": "Vue.js 3 - Fundamentals with the Composition API",
             "path": "vuejs-3-fundamentals-with-the-composition-api"
+        },
+        {
+            "name": "Vue Component Fundamentals with the Composition API",
+            "path": "vue-component-fundamentals-with-the-composition-api"
         }
     ]
 }
