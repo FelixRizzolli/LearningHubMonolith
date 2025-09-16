@@ -99,3 +99,7 @@
 ## Lesson 6
 
 - Inside of the `script` section, in order to access the value of some kind of reactive reference, you have to use the value property. The reason for this is, that vue uses proxies in order to create reactive data.
+
+## Lesson 7
+
+- `v-if`, `v-else-if` and `v-else` can be used to conditionally render components
