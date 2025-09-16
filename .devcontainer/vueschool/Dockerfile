@@ -13,3 +13,5 @@ RUN echo "INSTALL VUESCHOOL IMAGE" && \
     # Install GitHub CLI
     apt-get update && \
     apt-get install gh -y
+
+EXPOSE 5173

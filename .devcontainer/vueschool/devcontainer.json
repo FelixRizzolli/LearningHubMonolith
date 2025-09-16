@@ -7,6 +7,8 @@
     "remoteUser": "root",
     "workspaceFolder": "/workspace/courses/vueschool",
 
+    "forwardPorts": [5173],
+
     "customizations": {
         "vscode": {
             "extensions": [

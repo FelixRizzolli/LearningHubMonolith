@@ -9,6 +9,8 @@ services:
         volumes:
             # Mount the project directory to the container
             - ../../:/workspace
+        ports:
+            - 5173:5173
         networks:
             - default
         command: ["sleep", "infinity"]
