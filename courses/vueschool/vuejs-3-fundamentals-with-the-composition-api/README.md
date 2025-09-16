@@ -129,3 +129,20 @@
     - Example: `<div :class="['static-class', { active: isActive, error: hasError }]"></div>`
     - This allows you to combine static and dynamic classes flexibly.
 
+## Lesson 10
+
+- Like `ref`, `computed` is a Vue helper function that helps us interact with its reactivity system.
+- `computed` properties are used to define reactive values that are derived from other reactive sources (like refs or reactive objects).
+- The function passed to `computed` must return a value; this value will be cached and only recomputed when its dependencies change.
+- `computed` properties are lazily evaluated and efficiently cached, so they are only recalculated when needed.
+- Use `computed` when you want to transform or combine data for the presentation layer, but do not use them to cause side effects or modify state.
+- `computed` properties are accessed like refs, so you need to use `.value` to get their value in the script section.
+- You can use `computed` properties in templates without `.value` (Vue unwraps them automatically in templates).
+- Compared to methods, `computed` properties are cached based on their dependencies, while methods are re-executed every time they are called in the template.
+- Example:
+  ```js
+  import { ref, computed } from "vue";
+  const count = ref(1);
+  const double = computed(() => count.value * 2);
+  ```
+  In the template: `<span>{{ double }}</span>`
