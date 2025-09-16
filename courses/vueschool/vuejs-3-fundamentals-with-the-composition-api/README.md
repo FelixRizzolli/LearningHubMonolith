@@ -146,3 +146,24 @@
   const double = computed(() => count.value * 2);
   ```
   In the template: `<span>{{ double }}</span>`
+
+## Lesson 11
+
+- The `reactive` helper function is used to create a deeply reactive object or array. It is best suited for non-primitive data types (objects and arrays).
+- Unlike `ref`, you do not need to use `.value` to access or modify properties of a reactive object; you work with it directly.
+- Example:
+  ```js
+  import { reactive } from "vue";
+  const state = reactive({ count: 0, items: [] });
+  state.count++;
+  state.items.push("apple");
+  ```
+- All nested properties of a `reactive` object are also reactive—this is called deep reactivity.
+- Deep reactivity means that every property, at any level of nesting (e.g., `obj.a.b.c.d`), is made reactive and tracked by Vue. There is no fixed limit to the depth; Vue will make all nested properties reactive as long as they are plain objects or arrays. However, very deeply nested structures may impact performance.
+- You cannot make primitive values (like numbers or strings) reactive with `reactive`; use `ref` for those.
+- If you assign a new object to a `reactive` variable, the reactivity is lost. Instead, mutate the properties of the existing object.
+- When you need to return a reactive object from a composition function, prefer `reactive` for objects and arrays, and `ref` for primitives.
+- If you need to access a reactive object in a template, you can use its properties directly (no `.value` needed).
+- To get a ref for a property of a reactive object, use the `toRef` or `toRefs` helper functions.
+- Caveat: `reactive` does not work with class instances or non-plain objects as expected; use plain objects for best results.
+- Note: `ref` does not provide deep reactivity for objects or arrays. When you use `ref` with an object or array, only the reference is reactive (shallow reactivity). Nested changes are not tracked unless you use `reactive` or access the object through `.value` and ensure reactivity manually. Use `reactive` if you need deep reactivity for complex data structures.
