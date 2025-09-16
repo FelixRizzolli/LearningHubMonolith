@@ -71,3 +71,11 @@
   </ul>
 </template>
 ```
+
+## Lesson 3
+
+- `v-model` can also take modifiers. Midifiers can alter the behavior of the model and are defined by adding a period followed by the modifier name.
+    - `v-model.lazy="item"` lazy updates the item after we've blurred the input
+    - `v-model.number="item"` casts the data to a number
+    - `v-model.trim="item"` removes automatically any surrounding white space from your data
+- `v-model` can be also used textareas, selects, checkboxes, radiobuttons, and more
