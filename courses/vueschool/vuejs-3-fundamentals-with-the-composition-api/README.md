@@ -26,7 +26,7 @@
 </template>
 ```
 
-## Lesson 2
+## Lesson 2 & 3
 
 ```html
 <script setup>
@@ -76,7 +76,7 @@
 </template>
 ```
 
-## Lesson 3
+## Lesson 4
 
 - `v-model` can also take modifiers. Modifiers can alter the behavior of the model and are defined by adding a period followed by the modifier name.
   - `v-model.lazy="item"` updates the item only after the input loses focus (on blur)
@@ -84,7 +84,7 @@
   - `v-model.trim="item"` automatically removes any surrounding white space from your data
 - `v-model` can also be used with textareas, selects, checkboxes, radio buttons, and more
 
-## Lesson 4
+## Lesson 5
 
 - With `v-on` you can define event listeners like `v-on:click` or the shorthand `@click`.
 - `v-on:keyup` is used to listen for keyboard events on an input or element. It triggers every time a key is released while the element is focused.
@@ -95,3 +95,7 @@
 - You can also use event modifiers to change the default behavior:
   - `v-on:submit.prevent` prevents the default form submission and allows you to handle the submit event in JavaScript.
 - `v-on` can be written as `@` as a short form (e.g., `@click`, `@keyup.enter`).
+
+## Lesson 6
+
+- Inside of the `script` section, in order to access the value of some kind of reactive reference, you have to use the value property. The reason for this is, that vue uses proxies in order to create reactive data.
