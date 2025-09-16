@@ -175,3 +175,11 @@
 - Vite is a fast build tool that provides a great developer experience for Vue projects.
 - The main component file (e.g., `App.vue`) contains script, template, and optional style sections. These are called single file components.
 - For advanced setups, you can use Vue via CDN without a build step, but this limits features like `<script setup>`. Using Vite and the Composition API is recommended for most projects.
+
+## Lesson 13
+
+- When bootstrapping a Vue.js project with the Create Vue tool, a file called `main.js` (or `main.ts` for TypeScript) is provided in the source directory. This file is the entry point for your Vue app, where the Vue application instance is created.
+- The object passed to the `createApp` function is a Vue component—usually the root component (like `App.vue`).
+- The root component can use other components, forming a component tree.
+- The last step in `main.js` is to mount the Vue application to the DOM using the `mount` method, which takes a CSS selector for the target element (usually found in `index.html`).
+- The Create Vue tool automates this setup, but understanding the process helps you structure and expand your app.
