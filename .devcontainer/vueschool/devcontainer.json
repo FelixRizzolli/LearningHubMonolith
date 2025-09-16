@@ -1,18 +1,18 @@
 {
-    "name": "LHM: Python Institute - Python Essentials 2",
+    "name": "LHM: VueSchool",
     "dockerComposeFile": "./compose.yml",
     "service": "devcontainer",
     "shutdownAction": "none",
 
     "remoteUser": "root",
-    "workspaceFolder": "/workspace/courses/edube/python-institute/pe-2",
+    "workspaceFolder": "/workspace/courses/vueschool",
 
     "customizations": {
         "vscode": {
             "extensions": [
-                /* python specific packages */
-                "ms-python.python",
-                "ms-python.debugpy",
+                /* vue specific packages */
+                "esbenp.prettier-vscode",
+                "vue.volar",
                 /* common packages */
                 "eamodio.gitlens",
                 "gruntfuggly.todo-tree",

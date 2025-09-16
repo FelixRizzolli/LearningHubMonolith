@@ -10,8 +10,10 @@
     "customizations": {
         "vscode": {
             "extensions": [
+                /* python specific packages */
                 "ms-python.python",
                 "ms-python.debugpy",
+                /* common packages */
                 "eamodio.gitlens",
                 "gruntfuggly.todo-tree",
                 "aaron-bond.better-comments",
