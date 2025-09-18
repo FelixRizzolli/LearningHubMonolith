@@ -23,6 +23,10 @@
         {
             "name": "Vue.js Transitions and Animations",
             "path": "vuejs-transitions-and-animations"
+        },
+        {
+            "name": "The Vue.js Master Class 2024 Edition",
+            "path": "the-vuejs-master-class-2024-edition"
         }
     ]
 }
