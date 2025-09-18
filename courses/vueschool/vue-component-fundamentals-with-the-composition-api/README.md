@@ -197,9 +197,9 @@
 
 **Example: Local Registration (Composition API)**
 
-```vue
+```html
 <script setup>
-import MyComponent from "./components/MyComponent.vue";
+  import MyComponent from "./components/MyComponent.vue";
 </script>
 
 <template>
@@ -234,16 +234,16 @@ app.mount("#app");
 
 **Example: Child emits a custom event**
 
-```vue
+```html
 <!-- ChildComponent.vue -->
 <script setup>
-const props = defineProps({
-  label: String,
-});
-const emit = defineEmits(["customAction"]);
-function handleClick() {
-  emit("customAction", props.label);
-}
+  const props = defineProps({
+    label: String,
+  });
+  const emit = defineEmits(["customAction"]);
+  function handleClick() {
+    emit("customAction", props.label);
+  }
 </script>
 
 <template>
@@ -254,15 +254,15 @@ function handleClick() {
 
 **Example: Parent listens for the event and updates state**
 
-```vue
+```html
 <!-- ParentComponent.vue -->
 <script setup>
-import { ref } from "vue";
-import ChildComponent from "./ChildComponent.vue";
-const lastAction = ref("");
-function handleCustomAction(payload) {
-  lastAction.value = payload;
-}
+  import { ref } from "vue";
+  import ChildComponent from "./ChildComponent.vue";
+  const lastAction = ref("");
+  function handleCustomAction(payload) {
+    lastAction.value = payload;
+  }
 </script>
 
 <template>
@@ -275,7 +275,7 @@ function handleCustomAction(payload) {
 
 **Alternative: Using native event listeners**
 
-```vue
+```html
 <ChildComponent label="Click Me" @click="doSomething" />
 ```
 
@@ -355,6 +355,74 @@ function handleCustomAction(payload) {
 - **Best Practice:** Use lifecycle hooks to manage side effects and resource cleanup, ensuring your components behave predictably and efficiently.
 
 ## Lesson 9 - Vue Component Slots
+
+- **What Are Slots?**  
+  Slots allow you to pass content (including HTML and components) from a parent to a child component, giving the parent full control over what appears inside the child.
+
+- **Default Slot:**  
+  Place content between the opening and closing tags of a component. In the child, use the `<slot></slot>` element to display this content.
+
+- **Named Slots:**  
+  You can define multiple slots in a component by giving them names (e.g., `<slot name="icon"></slot>`). The parent provides content for named slots using the `v-slot:name` directive or its shorthand `#name`.
+
+- **Default Content:**  
+  You can provide fallback content inside a slot element, which will be used if the parent does not provide content for that slot.
+
+- **Scoped Slots:**  
+  Scoped slots allow the child to expose data (slot props) to the parent, so the parent can use that data when rendering slot content. The parent accesses these props by destructuring them in the `v-slot` directive.
+
+- **Use Cases:**
+
+  - Pass HTML or components from parent to child.
+  - Create flexible, reusable components (e.g., buttons, layouts).
+  - Share state from child to parent within the slot context.
+
+- **Example (Default and Named Slots):**
+
+  ```html
+  <!-- ChildComponent.vue -->
+  <template>
+    <button>
+      <slot name="icon"></slot>
+      <slot>Default Button</slot>
+    </button>
+  </template>
+  ```
+
+  ```html
+  <!-- ParentComponent.vue -->
+  <ChildComponent>
+    <template #icon>
+      <span>👋</span>
+    </template>
+    Submit
+  </ChildComponent>
+  ```
+
+- **Example (Scoped Slot):**
+
+  ```html
+  <!-- ChildComponent.vue -->
+  <template>
+    <slot :hovered="hovered"></slot>
+  </template>
+
+  <script setup>
+    import { ref } from "vue";
+    const hovered = ref(false);
+  </script>
+  ```
+
+  ```html
+  <!-- ParentComponent.vue -->
+  <ChildComponent v-slot="{ hovered }">
+    <span v-if="hovered">Hovered!</span>
+    <span v-else>Not hovered</span>
+  </ChildComponent>
+  ```
+
+- **Best Practice:**  
+  Use slots for maximum flexibility when you want to let the parent control part of a child’s template, especially for reusable UI components. Use scoped slots to share state or data from child to parent within the slot.
 
 ## Lesson 10 - Build a GitHub User Profile Vue Component
 
