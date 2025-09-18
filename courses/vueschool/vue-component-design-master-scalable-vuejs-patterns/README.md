@@ -361,8 +361,87 @@ watch(
 
 ## Lesson 7 - Some Advanced Patterns
 
-### Tightly Coupled Components
+This lesson introduces several advanced Vue component patterns that enable powerful and flexible UI architectures:
+
+### Tightly Coupled Components (with provide/inject)
+
+- Used when two components are designed to work together, such as `AppTabs` and `AppTab`.
+- Communication between them is handled via Vue’s `provide`/`inject` API, allowing child components to access parent state or methods without explicit prop drilling.
+- Example usage:
+
+```vue
+<!-- AppTabs.vue -->
+<template>
+  <div>
+    <div class="tab-titles">
+      <slot />
+    </div>
+    <div class="tab-content">
+      <slot name="content" />
+    </div>
+  </div>
+</template>
+<script setup>
+import { provide, ref } from "vue";
+const activeTab = ref(0);
+provide("activeTab", activeTab);
+</script>
+```
+
+```vue
+<!-- AppTab.vue -->
+<template>
+  <button @click="select">{{ title }}</button>
+</template>
+<script setup>
+import { inject } from 'vue'
+const activeTab = inject('activeTab')
+function select() { activeTab.value = /* tab index */ }
+</script>
+```
 
 ### Recursive Components
 
-### Lazy Components
+- A component that calls itself in its template, useful for rendering nested structures (e.g., file trees, nested menus).
+- Example:
+
+```vue
+<!-- FileTree.vue -->
+<template>
+  <ul>
+    <li v-for="item in items" :key="item.id">
+      {{ item.name }}
+      <FileTree v-if="item.children" :items="item.children" />
+    </li>
+  </ul>
+</template>
+<script setup>
+defineProps({ items: Array });
+</script>
+```
+
+### Dynamic & Lazy Components
+
+- Dynamically load and render components only when needed, improving performance by reducing initial bundle size.
+- Use `defineAsyncComponent` and dynamic imports for lazy loading:
+
+```vue
+<script setup>
+import { defineAsyncComponent, ref } from "vue";
+const toggled = ref(true);
+const DynamicOne = defineAsyncComponent(() => import("./DynamicOne.vue"));
+const DynamicTwo = defineAsyncComponent(() => import("./DynamicTwo.vue"));
+</script>
+
+<template>
+  <component :is="toggled ? DynamicOne : DynamicTwo" />
+</template>
+```
+
+- In Nuxt, you can prefix a component with `Lazy` (e.g., `<LazyMyComponent />`) to achieve the same effect automatically.
+
+**Benefits:**
+
+- Tightly coupled components create clean, intuitive APIs for related components.
+- Recursive components elegantly handle deeply nested data.
+- Dynamic/lazy components optimize performance by loading code only when needed.
