@@ -15,6 +15,10 @@
         {
             "name": "Vue Component Design: Master Scalable Vue.js Patterns",
             "path": "vue-component-design-master-scalable-vuejs-patterns"
+        },
+        {
+            "name": "Vue Composables: How to Craft Reusable Stateful Logic",
+            "path": "vue-composables-how-to-craft-reusable-stateful-logic"
         }
     ]
 }
