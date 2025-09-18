@@ -1,5 +1,5 @@
 <script setup>
-import GithubProfiles from "./components/GithubProfiles.vue";
+import GithubProfiles from "./GithubProfiles.vue";
 </script>
 
 <template>
