@@ -6,34 +6,35 @@
 
   - Components are reusable pieces of markup and logic, bundled together.
   - Used to build different parts of websites or web apps (e.g., headers, cards, filters, badges).
+  - Components are the building blocks of Vue apps, enabling modular and reusable code.
 
 - **Creating a Component**
 
   - Create a new `.vue` file in the `components` directory (e.g., `CounterButton.vue`).
   - Add a `<template>` section for markup:
-    ```vue
+    ```html
     <template>
       <button @click="count++">{{ count }}</button>
     </template>
     ```
   - Add a `<script setup>` section for logic:
-    ```vue
+    ```html
     <script setup>
-    import { ref } from "vue";
-    const count = ref(0);
+      import { ref } from "vue";
+      const count = ref(0);
     </script>
     ```
 
 - **Using a Component**
 
   - Import the component in `App.vue`:
-    ```vue
+    ```html
     <script setup>
-    import CounterButton from "./components/CounterButton.vue";
+      import CounterButton from "./components/CounterButton.vue";
     </script>
     ```
   - Use the component in the template (multiple possibilities):
-    ```vue
+    ```html
     <!-- PascalCase, standard tag -->
     <CounterButton></CounterButton>
     <!-- kebab-case, standard tag -->
@@ -53,7 +54,7 @@
 
   - Components can be used multiple times on a page.
   - Each instance maintains its own state:
-    ```vue
+    ```html
     <CounterButton />
     <CounterButton />
     <CounterButton />
@@ -62,14 +63,122 @@
 - **Self-Closing Tags**
 
   - If no slot/content is needed, use self-closing syntax:
-    ```vue
+    ```html
     <CounterButton />
     ```
 
-- **Key Takeaway**
-  - Components are the building blocks of Vue apps, enabling modular and reusable code.
-
 ## Lesson 2 - Reusable Components with Props
+
+- By extracting repeated markup (like coffee subscription plans) into a component, code becomes cleaner and easier to maintain.
+
+  **Example (before):**
+
+  ```html
+  <div class="plan">
+    <span class="title">The Hacker</span>
+    <div class="description">For those who love to hack on code.</div>
+  </div>
+  <div class="plan">
+    <span class="title">The Addict</span>
+    <div class="description">For those who can't get enough coffee.</div>
+  </div>
+  <!-- ...more repeated markup... -->
+  ```
+
+  **Example (after):**
+
+  ```html
+  <CoffeePlan
+    name="The Hacker"
+    description="For those who love to hack on code."
+  />
+  <CoffeePlan
+    name="The Addict"
+    description="For those who can't get enough coffee."
+  />
+  ```
+
+- Props allow components to accept dynamic data, making them flexible and reusable for different content.
+
+  **Example:**
+
+  ```html
+  <CoffeePlan
+    name="The Hacker"
+    description="For those who love to hack on code."
+  />
+  <CoffeePlan
+    name="The Addict"
+    description="For those who can't get enough coffee."
+  />
+  ```
+
+- Props are defined in the `<script setup>` block using the `defineProps` macro (no import needed).
+
+  **Example:**
+
+  ```html
+  <script setup>
+    defineProps(["name", "description"]);
+  </script>
+  ```
+
+- Props can be defined as an array (simple) or as an object (for type checking, default values, and required fields).
+
+  **Example (object syntax):**
+
+  ```html
+  <script setup>
+    defineProps({
+      name: { type: String, required: true },
+      description: { type: String, default: "No description" },
+    });
+  </script>
+  ```
+
+- Passing props is done using HTML-like attributes, and you can use the `v-for` directive to render multiple component instances with different prop values.
+
+  **Example (v-for):**
+
+  ```html
+  <script setup>
+    import { ref } from "vue";
+    const plans = ref([
+      {
+        name: "The Hacker",
+        description: "For those who love to hack on code.",
+      },
+      {
+        name: "The Addict",
+        description: "For those who can't get enough coffee.",
+      },
+      {
+        name: "The Curious",
+        description: "For those who want to try something new.",
+      },
+    ]);
+  </script>
+
+  <template>
+    <CoffeePlan
+      v-for="plan in plans"
+      :key="plan.name"
+      :name="plan.name"
+      :description="plan.description"
+    />
+  </template>
+  ```
+
+- Vue will warn in the console if a prop receives the wrong type or if a required prop is missing.
+
+  **Example (prop validation warning):**
+
+  ```html
+  <CoffeePlan :name="true" />
+  <!-- Console warning: Invalid prop: type check failed for prop 'name'. Expected String, got Boolean -->
+  ```
+
+- Using props and components together reduces code duplication and makes your app more maintainable and scalable.
 
 ## Lesson 3 - Nested Components in Vue
 
