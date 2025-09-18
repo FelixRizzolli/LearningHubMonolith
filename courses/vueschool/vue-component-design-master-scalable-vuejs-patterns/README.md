@@ -297,7 +297,67 @@ function fetchPost() {
 - This separation makes your codebase easier to test, understand, and scale.
 - This separation makes your codebase easier to test, understand, and scale.
 
-## Lesson 6 - From Component Pattern
+## Lesson 6 - Form Component Pattern
+
+The form component pattern allows you to use `v-model` on an entire form, just like on an input, but with more control:
+
+- Local form state is managed inside the form component, so changes are not committed to the parent until the form is submitted.
+- This enables native form validation and prevents partial/incomplete data from updating the parent.
+- The pattern works for both creating and editing objects, and can be made reactive to parent changes.
+
+**Key steps (explained):**
+
+1. **Receive form data from the parent:** Use `defineModel()` (or accept a `modelValue` prop) to get the initial form data from the parent component. This allows the parent to control the form’s value using `v-model`.
+2. **Clone the incoming object to local state:** Immediately clone the received object into a local `ref` (e.g., `form`). This prevents accidental mutation of the parent’s data before the form is submitted, since objects are passed by reference in JavaScript.
+3. **Bind form fields to the local state:** Use `v-model` on your form inputs to bind them to the local `form` ref, not directly to the parent’s value. This way, changes are staged locally until submission.
+4. **Emit the updated value on submit:** When the form is submitted, emit the updated value (e.g., by setting `modelValue.value = clone(form.value)` or emitting `update:modelValue`). This updates the parent only after validation and user confirmation.
+5. **Sync with parent changes:** Watch for changes in the parent’s value (`modelValue`). If the parent updates the value (e.g., resets the form or loads a new user), update the local form state to match, ensuring the form stays in sync with the parent.
+
+**Example:**
+
+```vue
+<!-- UserForm.vue -->
+<template>
+  <form @submit.prevent="handleSubmit">
+    <input v-model="form.name" required />
+    <input v-model="form.email" type="email" required />
+    <input v-model="form.age" type="number" required />
+    <button type="submit">
+      {{ modelValue ? "Edit User" : "Create User" }}
+    </button>
+  </form>
+</template>
+
+<script setup>
+import { ref, watch } from "vue";
+const modelValue = defineModel(); // or use defineProps({ modelValue: Object })
+const form = ref(clone(modelValue.value ?? { name: "", email: "", age: null }));
+
+function clone(obj) {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+function handleSubmit() {
+  modelValue.value = clone(form.value);
+}
+
+// Keep local form in sync with parent
+watch(
+  modelValue,
+  (val) => {
+    form.value = clone(val ?? { name: "", email: "", age: null });
+  },
+  { deep: true }
+);
+</script>
+```
+
+**Benefits:**
+
+- Prevents accidental parent updates before form submission
+- Leverages browser-native validation
+- Supports both create and edit flows
+- Keeps form state in sync with parent changes
 
 ## Lesson 7 - Some Advanced Patterns
 
