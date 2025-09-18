@@ -35,6 +35,10 @@
         {
             "name": "TypeScript with Vue.js 3: Master TypeScript in Vue",
             "path": "typescript-with-vuejs-3-master-typescript-in-vue"
+        },
+        {
+            "name": "Pinia: The Enjoyable Vue Store",
+            "path": "pinia-the-enjoyable-vue-store"
         }
     ]
 }
