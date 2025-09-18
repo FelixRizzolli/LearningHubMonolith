@@ -222,6 +222,63 @@ app.mount("#app");
 
 ## Lesson 5 - Communication Between Vue Components with Custom Events
 
+- **Parent-to-Child Communication:** Data is passed from parent to child components using props.
+- **Child-to-Parent Communication:** To send data from a child to its parent, use custom events.
+- **Defining Custom Events:** Use the `defineEmits` macro in the child component to declare custom events. The returned `emit` function is used to trigger these events, optionally with a payload (data).
+- **Emitting Events:** When a user interacts with the child (e.g., clicks a button), call the emit function with the event name and any relevant data.
+- **Listening for Events:** In the parent component, listen for the custom event using `v-on:eventName` or the shorthand `@eventName`. The payload is available as `$event` in the handler.
+- **General Use Case:** Custom events allow child components to notify their parent components about actions, changes, or data updates, enabling flexible and decoupled communication.
+- **Prop-Driven State:** The parent can pass props to children to control their state based on the parent's data, often in response to events emitted by the child.
+- **Alternative Approach:** Sometimes, you can use native event listeners directly on the child component’s root element, but custom events are more flexible for complex scenarios.
+- **Best Practice:** Use custom events for clear, maintainable communication from child to parent, especially when passing data or signaling actions.
+
+**Example: Child emits a custom event**
+
+```vue
+<!-- ChildComponent.vue -->
+<script setup>
+const props = defineProps({
+  label: String,
+});
+const emit = defineEmits(["customAction"]);
+function handleClick() {
+  emit("customAction", props.label);
+}
+</script>
+
+<template>
+  <button @click="handleClick">{{ label }}</button>
+  <!-- When clicked, emits 'customAction' with the label as payload -->
+</template>
+```
+
+**Example: Parent listens for the event and updates state**
+
+```vue
+<!-- ParentComponent.vue -->
+<script setup>
+import { ref } from "vue";
+import ChildComponent from "./ChildComponent.vue";
+const lastAction = ref("");
+function handleCustomAction(payload) {
+  lastAction.value = payload;
+}
+</script>
+
+<template>
+  <div>
+    <div>Last action: {{ lastAction }}</div>
+    <ChildComponent label="Click Me" @customAction="handleCustomAction" />
+  </div>
+</template>
+```
+
+**Alternative: Using native event listeners**
+
+```vue
+<ChildComponent label="Click Me" @click="doSomething" />
+```
+
 ## Lesson 6 - Vue Component Prop and Event Validation
 
 ## Lesson 7 - Component Naming Best Practices in Vue
