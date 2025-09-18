@@ -426,4 +426,62 @@ app.mount("#app");
 
 ## Lesson 10 - Build a GitHub User Profile Vue Component
 
+- **Props and Validation:**
+
+  - Use `defineProps` to accept data from parent components. Props can be validated for type and required status.
+    ```js
+    <script setup>
+    const props = defineProps({
+      username: { type: String, required: true }
+    });
+    </script>
+    ```
+
+- **Fetching Data Asynchronously:**
+
+  - Use the Composition API with `ref` to create reactive variables for fetched data.
+  - Fetch data in `async` functions and update the reactive variable.
+    ```js
+    <script setup>
+    import { ref, onMounted } from 'vue';
+    const props = defineProps({ username: String });
+    const user = ref(null);
+    onMounted(async () => {
+      const res = await fetch(`https://api.github.com/users/${props.username}`);
+      user.value = await res.json();
+    });
+    </script>
+    ```
+
+- **Conditional Rendering:**
+
+  - Use `v-if` to ensure template code only accesses data after it is loaded, preventing errors from undefined values.
+    ```html
+    <template>
+      <div v-if="user">
+        <!-- Render user info here -->
+      </div>
+    </template>
+    ```
+
+- **Dynamic Data Binding:**
+
+  - Bind data from the API response to template elements using Vue's mustache syntax.
+    ```html
+    <img :src="user.avatar_url" alt="Avatar" />
+    <h2>{{ user.name }}</h2>
+    <p><strong>Followers:</strong> {{ user.followers }}</p>
+    <p><strong>Following:</strong> {{ user.following }}</p>
+    <a :href="user.html_url" target="_blank">View Profile</a>
+    ```
+
+- **Component Reusability:**
+
+  - Components can be used multiple times with different props, each instance maintaining its own state and data.
+    ```html
+    <GithubCard username="danielkellyio" />
+    <GithubCard username="octocat" />
+    <GithubCard username="vuejs" />
+    ```
+
 ## Lesson 11 - Build an Alert Vue Component
