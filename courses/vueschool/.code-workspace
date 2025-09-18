@@ -31,6 +31,10 @@
         {
             "name": "TypeScript Fundamentals: Learn TypeScript from Scratch",
             "path": "typescript-fundamentals-learn-typescript-from-scratch"
+        },
+        {
+            "name": "TypeScript with Vue.js 3: Master TypeScript in Vue",
+            "path": "typescript-with-vuejs-3-master-typescript-in-vue"
         }
     ]
 }
