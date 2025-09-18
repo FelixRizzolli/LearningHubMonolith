@@ -11,6 +11,10 @@
         {
             "name": "Vue Component Fundamentals with the Composition API",
             "path": "vue-component-fundamentals-with-the-composition-api"
+        },
+        {
+            "name": "Vue Component Design: Master Scalable Vue.js Patterns",
+            "path": "vue-component-design-master-scalable-vuejs-patterns"
         }
     ]
 }
