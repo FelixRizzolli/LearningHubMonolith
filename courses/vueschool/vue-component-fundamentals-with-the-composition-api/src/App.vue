@@ -29,6 +29,23 @@ function handleNavSelect(component) {
     <AppNavbar :navigation="navigation" @select="handleNavSelect" />
   </header>
   <main>
-    <component :is="currentNav" />
+    <Transition name="fade" mode="out-in">
+      <component :is="currentNav" />
+    </Transition>
   </main>
 </template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+</style>
