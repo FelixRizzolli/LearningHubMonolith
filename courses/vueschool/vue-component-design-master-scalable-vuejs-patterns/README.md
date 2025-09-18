@@ -181,7 +181,121 @@ defineProps({ user: Object });
 
 This approach keeps your page components clean, makes lists and list items reusable, and allows you to further break out empty states or controls as needed. The result is a more maintainable and scalable codebase.
 
-## Lesson 5 - Smart vs. Dump Components
+## Lesson 5 - Smart vs. Dumb Components
+
+This pattern distinguishes between two main types of components:
+
+- **Dumb (Presentational) Components:**
+  - Only receive data via props and display it.
+  - Contain little or no logic; focus on rendering and styling.
+  - Examples: buttons, cards, or list items.
+  - Can be further divided into:
+    - **Base components** (generic, reusable, e.g., `AppButton`, `AppCard`)
+    - **App-specific dumb components** (specific to your app, e.g., `PostsListItem`)
+  - Naming: Prefix base components with `App`, `Base`, or `V` (e.g., `AppButton`).
+  - Advantages: Easier to test, understand, and style.
+
+**Example of a dumb component:**
+
+```vue
+<!-- AppCard.vue -->
+<template>
+  <div class="card">
+    <slot />
+  </div>
+</template>
+```
+
+```vue
+<!-- PostsListItem.vue -->
+<template>
+  <AppCard>
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.summary }}</p>
+  </AppCard>
+</template>
+
+<script setup>
+defineProps({ post: Object });
+</script>
+```
+
+- **Smart (Container) Components:**
+  - Manage state, logic, and may handle data fetching.
+  - Pass data down to dumb components as props.
+  - Examples: list containers, pages, or components that fetch/filter data.
+  - Can be further divided into:
+    - **Smart components with data fetching:** Responsible for retrieving data from APIs or other sources, managing loading and error states.
+    - **Smart components without data fetching:** Manage local state, computed properties, and logic, but receive their data via props or context.
+
+**Example of a smart component (no data fetching):**
+
+```vue
+<!-- PostsList.vue -->
+<template>
+  <div>
+    <input v-model="filter" placeholder="Filter posts..." />
+    <PostsListItem v-for="post in filteredPosts" :key="post.id" :post="post" />
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from "vue";
+import PostsListItem from "./PostsListItem.vue";
+
+const posts = ref([
+  { id: 1, title: "Hello", summary: "..." },
+  // ...more posts
+]);
+const filter = ref("");
+const filteredPosts = computed(() =>
+  posts.value.filter((p) => p.title.includes(filter.value))
+);
+</script>
+```
+
+**Example of a smart component (with data fetching):**
+
+```vue
+<!-- LatestPost.vue -->
+<template>
+  <div v-if="loading">Loading...</div>
+  <div v-else-if="error">Error: {{ error }}</div>
+  <div v-else>
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.summary }}</p>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+const post = ref(null);
+const loading = ref(true);
+const error = ref(null);
+onMounted(async () => {
+  try {
+    // Simulate API call
+    post.value = await fetchPost();
+  } catch (e) {
+    error.value = e.message;
+  } finally {
+    loading.value = false;
+  }
+});
+function fetchPost() {
+  // Replace with real API call
+  return Promise.resolve({ title: "Latest Post", summary: "..." });
+}
+</script>
+```
+
+**Best practices:**
+
+- Prefer more dumb components than smart components for maintainability.
+- Extract logic and state into smart components, and keep presentational components simple.
+- When possible, separate data fetching from local state management for clarity.
+- This separation makes your codebase easier to test, understand, and scale.
+- This separation makes your codebase easier to test, understand, and scale.
 
 ## Lesson 6 - From Component Pattern
 
