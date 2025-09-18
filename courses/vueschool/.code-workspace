@@ -1,6 +1,10 @@
 {
     "folders": [
         {
+            "name": "VueSchool - Root Folder",
+            "path": "."
+        },
+        {
             "name": "Vue.js 3 - Fundamentals with the Options API",
             "path": "vuejs-3-fundamentals-with-the-options-api"
         },
