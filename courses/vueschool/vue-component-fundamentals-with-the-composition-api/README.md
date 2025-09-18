@@ -182,6 +182,12 @@
 
 ## Lesson 3 - Nested Components in Vue
 
+- In Vue, components can be composed of other components, allowing you to build complex UIs from smaller, reusable building blocks.
+- Nesting components helps organize your code, reduce duplication, and promote separation of concerns.
+- Parent components can include child components in their templates and manage their data or behavior.
+- Data for nested components can be kept local for encapsulation or passed in as props for flexibility and reuse.
+- This pattern enables you to reuse and combine components in different parts of your application, making your codebase more maintainable and scalable.
+
 ## Lesson 4 - Global vs Local Vue Components
 
 ## Lesson 5 - Communication Between Vue Components with Custom Events
