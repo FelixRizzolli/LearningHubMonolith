@@ -1,8 +1,7 @@
 <script setup>
-import { ref } from "vue";
-const title = ref("Hello world!");
+import CounterButton from './components/CounterButton.vue'
 </script>
 
 <template>
-    <h1>{{ title }}</h1>
+    <CounterButton></CounterButton>
 </template>
