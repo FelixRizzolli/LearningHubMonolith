@@ -18,6 +18,39 @@ These patterns help avoid common pitfalls and enable building scalable, maintain
 
 ## Lesson 2 - Branching Component Pattern
 
+The branching component pattern (also called the extract conditional pattern) involves extracting each branch of a conditional (like `v-if`/`v-else`) into its own component.
+
+- Useful when a component’s template contains large or complex markup inside conditional blocks, such as loading skeletons and loaded content.
+- By moving each branch (e.g., loading state and loaded state) into separate components, the main component’s template becomes much clearer and easier to read.
+- The logic and data-fetching remain in the parent, but the UI for each state is delegated to dedicated child components.
+- This pattern improves maintainability, readability, and makes future edits easier, especially as components grow in complexity.
+
+**Example:**
+
+Suppose you have a component with a conditional in the template:
+
+```vue
+<template>
+  <div>
+    <div v-if="loading">Loading...</div>
+    <div v-else>Content loaded!</div>
+  </div>
+</template>
+```
+
+With the branching component pattern, you extract each branch into its own component:
+
+```vue
+<template>
+  <div>
+    <LoadingSkeleton v-if="loading" />
+    <LoadedContent v-else />
+  </div>
+</template>
+```
+
+This keeps the main component clean and delegates the UI for each state to dedicated components.
+
 ## Lesson 3 - Slots and Template Props Pattern
 
 ## Lesson 4 - List with ListItem Pattern
