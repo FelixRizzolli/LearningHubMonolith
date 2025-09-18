@@ -53,6 +53,73 @@ This keeps the main component clean and delegates the UI for each state to dedic
 
 ## Lesson 3 - Slots and Template Props Pattern
 
+Props in Vue can serve different purposes:
+
+- **State props**: Pass reactive state (e.g., loading indicators) that changes during the app’s lifetime.
+- **Configuration props**: Pass hardcoded options to configure a component (e.g., `outlined: true`).
+- **Template props**: Pass values that are only displayed directly in the template, not used in logic or attributes.
+
+When a prop is only used to display a string or content in the template (a template prop), it’s often better to use a slot instead. Slots make components more flexible, allowing parents to pass in not just text, but also HTML or other components.
+
+**Example: Using a template prop**
+
+```vue
+<!-- AppButton.vue -->
+<template>
+  <button :class="{ 'btn-outline': outline }">
+    <AppSpinner v-if="loading" />
+    {{ label }}
+  </button>
+</template>
+
+<script setup>
+defineProps({
+  // state props
+  loading: { type: Boolean, default: false },
+
+  // configuration props
+  outline: { type: Boolean, default: false },
+
+  // template props
+  label: { type: String },
+});
+</script>
+```
+
+Usage:
+
+```vue
+<AppButton label="Click me" />
+```
+
+**Refactored: Using a slot**
+
+```vue
+<!-- AppButton.vue -->
+<template>
+  <button :class="{ 'btn-outline': outline }">
+    <slot></slot>
+  </button>
+</template>
+
+<script setup>
+defineProps({
+  loading: { type: Boolean, default: false },
+  outline: { type: Boolean, default: false },
+});
+</script>
+```
+
+Usage:
+
+```vue
+<AppButton>Click me</AppButton>
+<AppButton><strong>Click me</strong></AppButton>
+<AppButton><IconStar /> Favorite</AppButton>
+```
+
+With slots, the parent can pass in any content, not just plain text, making the component much more flexible and reusable.
+
 ## Lesson 4 - List with ListItem Pattern
 
 ## Lesson 5 - Smart vs. Dump Components
