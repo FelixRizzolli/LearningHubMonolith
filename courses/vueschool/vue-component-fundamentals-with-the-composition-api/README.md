@@ -288,22 +288,33 @@ function handleCustomAction(payload) {
     name: {
       type: String,
       required: true,
-      validator: value => value.startsWith("The"),
-    }
+      validator: (value) => value.startsWith("The"),
+    },
   });
   ```
 - **Event Validation:** To validate the payload of a custom event, define emits as an object with event names as keys and validator functions as values. The validator receives the payload and should return `true` or `false`.
 - **Example (Event Validator):**
   ```js
   defineEmits({
-    selected: payload => typeof payload === "string",
-    hiThere: null // No validation for this event
+    selected: (payload) => typeof payload === "string",
+    hiThere: null, // No validation for this event
   });
   ```
 - **Multiple Events:** You can validate some events and not others by using `null` for events that don’t need validation.
 - **Best Practice:** Use prop and event validation to catch errors early and ensure your components receive and emit the correct data types and formats.
 
 ## Lesson 7 - Component Naming Best Practices in Vue
+
+- **Follow the Vue Style Guide:** Use the official Vue style guide to keep your component naming predictable and consistent, making your codebase easier to understand and navigate.
+- **Multi-word Component Names:** Always use multi-word names for components (e.g., `BaseButton`, `UserCard`) to avoid conflicts with standard HTML elements, which are single-word.
+- **File Name Casing:** Use PascalCase (e.g., `MyComponent.vue`) or kebab-case (e.g., `my-component.vue`) for single file component names. Be consistent throughout your project.
+- **Prop Definition Syntax:** Prefer the detailed object syntax for props, specifying at least the type, and ideally also `required`, `default`, and `validator` when needed.
+- **Prefix Base Components:** Prefix foundational, reusable components with `Base`, `App`, or `V` (e.g., `BaseButton.vue`, `AppInput.vue`).
+- **Consistency:** Stick to one naming convention for your project and avoid mixing styles.
+- **Examples:**
+  - Good: `BaseButton.vue`, `UserProfileCard.vue`, `app-header.vue`
+  - Bad: `button.vue`, `userprofilecard.vue`, `Appheader.vue`
+- **Further Reading:** The [Vue style guide](https://vuejs.org/style-guide/) contains more recommendations for naming and organizing components. Refer to the official documentation for advanced best practices.
 
 ## Lesson 8 - Vue Component Lifecycle Hooks
 
