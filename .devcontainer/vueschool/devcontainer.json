@@ -24,7 +24,8 @@
             "settings": {
                 "files.autoSave": "afterDelay",
                 "files.autoSaveDelay": 1000,
-                "editor.formatOnSave": true
+                "editor.formatOnSave": true,
+                "github.copilot.chat.codeGeneration.useInstructionFiles": true
             }
         }
     }
