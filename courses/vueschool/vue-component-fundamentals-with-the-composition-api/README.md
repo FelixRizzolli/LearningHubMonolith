@@ -190,6 +190,36 @@
 
 ## Lesson 4 - Global vs Local Vue Components
 
+- In Vue with the Composition API, you can register components either globally or locally.
+- Local registration (recommended for most cases) means importing a component directly in the `<script setup>` block of the component where it is used. This keeps your code modular and avoids unnecessary bloat.
+- Global registration makes a component available throughout your app, but even if a globally registered component is not used anywhere, it will still be included in the final JavaScript bundle and downloaded by the user. This can negatively impact performance and bundle size.
+- Prefer local registration for components only used in specific places, and reserve global registration for components that are truly reused across many parts of your app.
+
+**Example: Local Registration (Composition API)**
+
+```vue
+<script setup>
+import MyComponent from "./components/MyComponent.vue";
+</script>
+
+<template>
+  <MyComponent />
+</template>
+```
+
+**Example: Global Registration**
+
+```js
+// In main.js or main.ts
+import { createApp } from "vue";
+import App from "./App.vue";
+import MyComponent from "./components/MyComponent.vue";
+
+const app = createApp(App);
+app.component("MyComponent", MyComponent);
+app.mount("#app");
+```
+
 ## Lesson 5 - Communication Between Vue Components with Custom Events
 
 ## Lesson 6 - Vue Component Prop and Event Validation
