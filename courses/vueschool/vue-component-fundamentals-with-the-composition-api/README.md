@@ -485,3 +485,52 @@ app.mount("#app");
     ```
 
 ## Lesson 11 - Build an Alert Vue Component
+
+**About the Alert Component:**
+
+The alert component introduced in this lesson is a practical example of building a fully interactive, reusable UI element in Vue. It demonstrates:
+
+- **Customizability:** The component accepts a `type` prop to control its style (e.g., info, success, warning, error), and can display different icons and colors based on this type.
+- **Slot Usage:** The alert message is provided via a default slot, allowing any content to be injected by the parent.
+- **Interactivity:** An "X" button is included to close the alert. When clicked, the alert hides itself using local state.
+- **Custom Events:** The component emits a `closed` event when dismissed, so parent components can react (e.g., remove the alert from a list).
+- **Dynamic Classes and Icons:** The component uses computed properties to map the `type` prop to the correct CSS class and icon, ensuring styles and visuals match the alert's purpose.
+
+**Component Structure Example:**
+
+```vue
+<template>
+  <div v-if="!closed" :class="alertClass">
+    <component :is="iconComponent" class="icon" />
+    <span><slot /></span>
+    <button @click="close">X</button>
+  </div>
+</template>
+
+<script setup>
+import { ref, computed } from "vue";
+import IconInfo from "./IconInfo.vue";
+import IconSuccess from "./IconSuccess.vue";
+import IconWarning from "./IconWarning.vue";
+import IconError from "./IconError.vue";
+const props = defineProps({ type: { type: String, default: "info" } });
+const emit = defineEmits(["closed"]);
+const closed = ref(false);
+const alertClass = computed(() => `alert alert-${props.type}`);
+const iconComponent = computed(
+  () =>
+    ({
+      info: IconInfo,
+      success: IconSuccess,
+      warning: IconWarning,
+      error: IconError,
+    }[props.type] || IconInfo)
+);
+function close() {
+  closed.value = true;
+  emit("closed");
+}
+</script>
+```
+
+This approach results in a flexible, maintainable alert component that can be used in many scenarios and extended with additional features as needed.
