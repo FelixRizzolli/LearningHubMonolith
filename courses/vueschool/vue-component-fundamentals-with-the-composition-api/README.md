@@ -281,6 +281,28 @@ function handleCustomAction(payload) {
 
 ## Lesson 6 - Vue Component Prop and Event Validation
 
+- **Prop Validation:** You can add a `validator` function to a prop definition to control what values are considered valid. The function receives the prop value and should return `true` (valid) or `false` (invalid). If invalid, Vue will show a warning in the console.
+- **Example (Prop Validator):**
+  ```js
+  defineProps({
+    name: {
+      type: String,
+      required: true,
+      validator: value => value.startsWith("The"),
+    }
+  });
+  ```
+- **Event Validation:** To validate the payload of a custom event, define emits as an object with event names as keys and validator functions as values. The validator receives the payload and should return `true` or `false`.
+- **Example (Event Validator):**
+  ```js
+  defineEmits({
+    selected: payload => typeof payload === "string",
+    hiThere: null // No validation for this event
+  });
+  ```
+- **Multiple Events:** You can validate some events and not others by using `null` for events that don’t need validation.
+- **Best Practice:** Use prop and event validation to catch errors early and ensure your components receive and emit the correct data types and formats.
+
 ## Lesson 7 - Component Naming Best Practices in Vue
 
 ## Lesson 8 - Vue Component Lifecycle Hooks
