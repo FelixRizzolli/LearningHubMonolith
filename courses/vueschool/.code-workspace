@@ -39,6 +39,10 @@
         {
             "name": "Pinia: The Enjoyable Vue Store",
             "path": "pinia-the-enjoyable-vue-store"
+        },
+        {
+            "name": "VueUse for Everyone: Unlock Vue.js Composition Power",
+            "path": "vueuse-for-everyone-unlock-vuejs-composition-power"
         }
     ]
 }
