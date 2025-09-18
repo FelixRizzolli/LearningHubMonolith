@@ -19,6 +19,10 @@
         {
             "name": "Vue Composables: How to Craft Reusable Stateful Logic",
             "path": "vue-composables-how-to-craft-reusable-stateful-logic"
+        },
+        {
+            "name": "Vue.js Transitions and Animations",
+            "path": "vuejs-transitions-and-animations"
         }
     ]
 }
