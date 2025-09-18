@@ -318,6 +318,42 @@ function handleCustomAction(payload) {
 
 ## Lesson 8 - Vue Component Lifecycle Hooks
 
+- **Best Practice:** Use lifecycle hooks to manage side effects and resource cleanup, ensuring your components behave predictably and efficiently.
+
+- **Further Reading:**
+
+  - [Vue Lifecycle Guide](https://vuejs.org/guide/essentials/lifecycle)
+  - [All Vue Lifecycle Hooks (API Reference)](https://vuejs.org/api/composition-api-lifecycle.html#composition-api-lifecycle-hooks)
+
+- **Lifecycle Stages:** Every Vue component goes through a series of stages during its existence: creation, mounting to the DOM, updating, and unmounting (removal from the DOM).
+- **Lifecycle Hooks:** Vue provides special functions called lifecycle hooks that let you run code at specific points in a component's lifecycle. These hooks are prefixed with `on` (e.g., `onMounted`, `onUnmounted`).
+- **Common Hooks:**
+  - `onMounted`: Runs after the component is added to the DOM. Useful for DOM access, API calls, or starting timers.
+  - `onUnmounted`: Runs just before the component is removed from the DOM. Useful for cleanup, such as clearing intervals or removing event listeners.
+- **Template Refs:** To safely access DOM elements, use template refs in combination with `onMounted`.
+- **Memory Management:** Always clean up side effects (like intervals or subscriptions) in `onUnmounted` to prevent memory leaks.
+- **Other Hooks:** Vue offers additional hooks like `onBeforeMount`, `onBeforeUpdate`, `onUpdated`, and more for advanced use cases.
+- **Example (Basic Usage):**
+  ```js
+  <script setup>
+  import { ref, onMounted, onUnmounted } from 'vue';
+  const count = ref(0);
+  let intervalId;
+  onMounted(() => {
+    intervalId = setInterval(() => {
+      count.value++;
+    }, 1000);
+  });
+  onUnmounted(() => {
+    clearInterval(intervalId);
+  });
+  </script>
+  <template>
+    <div>Count: {{ count }}</div>
+  </template>
+  ```
+- **Best Practice:** Use lifecycle hooks to manage side effects and resource cleanup, ensuring your components behave predictably and efficiently.
+
 ## Lesson 9 - Vue Component Slots
 
 ## Lesson 10 - Build a GitHub User Profile Vue Component
