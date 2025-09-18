@@ -122,6 +122,65 @@ With slots, the parent can pass in any content, not just plain text, making the 
 
 ## Lesson 4 - List with ListItem Pattern
 
+Lists are everywhere in web apps—courses, users, cards, tables, etc. The List with ListItem pattern helps you encapsulate list logic and markup, making your code cleaner and more reusable.
+
+**Pattern steps:**
+
+- Extract the list markup and logic into a dedicated List component (e.g., `UserList`).
+- Pass the list data as a prop to the List component.
+- Extract the markup for each item into a ListItem component (e.g., `UserListItem`) if it becomes complex.
+- Optionally, extract empty states and content branches into their own components for clarity.
+
+**Example:**
+
+```vue
+<!-- UserList.vue -->
+<template>
+  <div>
+    <UserListControls />
+    <!-- optional, for filters/search -->
+    <UserListContent v-if="filteredUsers.length" :users="filteredUsers" />
+    <UserListEmpty v-else />
+  </div>
+</template>
+
+<script setup>
+defineProps({ users: Array });
+// ...filter logic, computed filteredUsers, etc.
+</script>
+```
+
+```vue
+<!-- UserListContent.vue -->
+<template>
+  <table>
+    <tbody>
+      <UserListItem v-for="user in users" :key="user.id" :user="user" />
+    </tbody>
+  </table>
+</template>
+
+<script setup>
+defineProps({ users: Array });
+</script>
+```
+
+```vue
+<!-- UserListItem.vue -->
+<template>
+  <tr>
+    <td>{{ user.name }}</td>
+    <!-- more fields as needed -->
+  </tr>
+</template>
+
+<script setup>
+defineProps({ user: Object });
+</script>
+```
+
+This approach keeps your page components clean, makes lists and list items reusable, and allows you to further break out empty states or controls as needed. The result is a more maintainable and scalable codebase.
+
 ## Lesson 5 - Smart vs. Dump Components
 
 ## Lesson 6 - From Component Pattern
