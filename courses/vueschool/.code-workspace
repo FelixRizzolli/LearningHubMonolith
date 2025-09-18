@@ -43,6 +43,10 @@
         {
             "name": "VueUse for Everyone: Unlock Vue.js Composition Power",
             "path": "vueuse-for-everyone-unlock-vuejs-composition-power"
+        },
+        {
+            "name": "Visual Studio Code for Vue.js Developers",
+            "path": "visual-studio-code-for-vuejs-developers"
         }
     ]
 }
