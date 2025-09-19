@@ -151,6 +151,34 @@ export function useFlexibleList(list: MaybeRefOrGetter<any[]>) {
 
 ## Lesson 8 - Refine A Composable API with Getter / Setter Computed Props
 
+- Design composables with intuitive interfaces by considering how end developers will interact with them.
+- Use getter/setter computed properties to allow both reading and updating reactive state in a natural way (e.g., `state.value = ...`).
+- A getter returns the current value, while a setter updates internal state based on the new value.
+- Throw an error in the setter if the new value is invalid or not found, to provide clear feedback.
+- This approach makes composables more flexible and user-friendly, aligning with Vue's reactivity system.
+
+**General Example:**
+
+```ts
+import { ref, computed } from "vue";
+
+export function useSelectableList(list: string[]) {
+  const activeIndex = ref(0);
+  const state = computed({
+    get: () => list[activeIndex.value],
+    set: (val: string) => {
+      const idx = list.indexOf(val);
+      if (idx >= 0) {
+        activeIndex.value = idx;
+      } else {
+        throw new Error("Value not found in list");
+      }
+    },
+  });
+  return { state };
+}
+```
+
 ## Lesson 9 - Extend Composable Functionality with a Config Argument
 
 ## Lesson 10 - Extend Composable Functionality with a Config Argument 2
