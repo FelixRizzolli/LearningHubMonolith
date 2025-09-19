@@ -43,7 +43,10 @@ const { state, prev, next, go } = useCycleList([
   "Cat",
   "Bird",
   "Iguana",
-]);
+], {
+    fallbackIndex: 0,
+    fallbackValue: 'Dog'
+});
 
 const goTo = ref(0);
 </script>

@@ -181,6 +181,36 @@ export function useSelectableList(list: string[]) {
 
 ## Lesson 9 - Extend Composable Functionality with a Config Argument
 
+- Use a configuration object to provide optional settings for composables, grouping related options together.
+- Define a TypeScript interface for the config object to enable type safety and IDE auto-completion.
+- Mark config properties as optional with `?` so users can provide any or all options.
+- Export the config interface and default config object for reuse and better maintainability.
+- Merge user-provided config with defaults inside the composable to ensure all options are handled, even if not all are provided.
+- For deeply nested config objects, consider using a utility like the `defu` package for deep merging.
+
+**General Example:**
+
+```ts
+// Define the config interface
+export interface UseExampleConfig {
+  fallbackIndex?: number;
+  fallbackValue?: any;
+}
+
+// Provide default config values
+export const useExampleConfigDefaults: UseExampleConfig = {
+  fallbackIndex: undefined,
+  fallbackValue: undefined,
+};
+
+// Merge user config with defaults
+export function useExample(list: any[], config?: UseExampleConfig) {
+  const _config = { ...useExampleConfigDefaults, ...config };
+  // ...use _config.fallbackIndex, _config.fallbackValue as needed
+  return {};
+}
+```
+
 ## Lesson 10 - Extend Composable Functionality with a Config Argument 2
 
 ## Lesson 11 - Provide Composable TypeSafety with TypeScript
