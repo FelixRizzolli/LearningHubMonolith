@@ -5,8 +5,6 @@ import AppProject from "./components/AppProject.vue";
 
 const navigation = shallowRef([
   { name: "Project 1", component: markRaw(AppProject), current: true },
-  { name: "Project 2", component: markRaw(AppProject), current: false },
-  { name: "Project 3", component: markRaw(AppProject), current: false },
 ]);
 
 const currentNav = ref(

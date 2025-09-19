@@ -120,6 +120,10 @@ export function useCycleList(list: any[]) {
 
 ## Lesson 5 - Define Reactive State and Functions within a Composable
 
+- Use Vue's reactivity utilities (such as `ref` and `computed`) to manage and expose reactive state within composables.
+- Keep implementation details private inside composables and only expose the necessary state and functions to consumers.
+- Encapsulate logic and state updates within composables to promote reusability and maintainability.
+
 ## Lesson 6 - Accept Reactive Composable Arguments
 
 ## Lesson 7 - Accept Flexible Component Arguments (Reactive, Getters, or Plain Data)
