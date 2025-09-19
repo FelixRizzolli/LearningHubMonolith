@@ -93,6 +93,31 @@ export function useCycleList(list: any[], config?: { startIndex?: number }) {
 
 ## Lesson 4 - Return Data and Functions From Composables
 
+- The arguments to a composable define its input (API), and the return value defines its output.
+- Return values are typically provided via an object containing reactive state and functions, making the composable flexible and easy to use.
+- For simple composables, you can return a single reactive value directly (e.g., a `ref`).
+- For more complex composables, return an object with multiple properties (state and functions) to provide a richer API.
+- Defining the input and output of your composable first (before implementation) helps clarify its intended usage and improves developer experience.
+
+**General Examples:**
+
+```ts
+// Simple composable returning a single ref
+export function useTitle() {
+  const title = ref("");
+  return title;
+}
+
+// More complex composable returning state and functions
+export function useCycleList(list: any[]) {
+  const state = ref("");
+  const next = () => {};
+  const prev = () => {};
+  const go = (index: number) => {};
+  return { state, next, prev, go };
+}
+```
+
 ## Lesson 5 - Define Reactive State and Functions within a Composable
 
 ## Lesson 6 - Accept Reactive Composable Arguments
