@@ -1,21 +1,67 @@
 # Lessons Learned
 
-## Lesson 1 - Introduction to Vue Component Design
+## Lesson 1 - Introduction to Composables
 
-## Lesson 2 - Branching Component Pattern
+- **Composable functions** in Vue are similar to helper or utility functions in other languages, but they encapsulate **reusable, stateful logic** using Vue's Composition API.
+- Composables typically use Vue's `ref` or `reactive` to define reactive state inside the function.
+- The convention is to name composables with a `use` prefix (e.g., `useMouse`, `useTitle`), though this is not required.
+- Composables are widely used in libraries like [VueUse](https://vueuse.org/) and component libraries such as Quasar, providing ready-to-use utilities for common tasks.
+- Examples of composables from VueUse:
+  - `useTitle`: Manipulates the document title reactively.
+  - `useMouse`: Tracks mouse coordinates reactively.
+  - `useNow`: Provides a reactive `Date` object that updates automatically.
+  - `useArrayDifference`: Computes the difference between two reactive arrays and keeps the result in sync.
+  - `useCycleList`: Cycles through a list/array reactively, exposing state and navigation functions.
+- **Key characteristics:**
+  - Encapsulate logic and state for reuse across components.
+  - Leverage Vue's reactivity system for automatic updates.
+  - Simplify working with browser APIs or user events by abstracting away manual event handling.
 
-## Lesson 3 - Slots and Template Props Pattern
+**General Example:**
 
-## Lesson 4 - List with ListItem Pattern
+```js
+import { ref } from "vue";
 
-## Lesson 5 - Smart vs. Dump Components
+// A simple composable to track a counter
+export function useCounter() {
+  const count = ref(0);
+  const increment = () => count.value++;
+  return { count, increment };
+}
+```
 
-## Lesson 6 - From Component Pattern
+**Usage in a component:**
 
-## Lesson 7 - Some Advanced Patterns
+```js
+import { useCounter } from "./composables/useCounter";
 
-### Tightly Coupled Components
+export default {
+  setup() {
+    const { count, increment } = useCounter();
+    return { count, increment };
+  },
+};
+```
 
-### Recursive Components
+// In template:
+// <button @click="increment">Clicked {{ count }} times</button>
 
-### Lazy Components
+## Lesson 2 - Write your first Composable
+
+## Lesson 3 - Accept Arguments For Flexible Composables
+
+## Lesson 4 - Return Data and Functions From Composables
+
+## Lesson 5 - Define Reactive State and Functions within a Composable
+
+## Lesson 6 - Accept Reactive Composable Arguments
+
+## Lesson 7 - Accept Flexible Component Arguments (Reactive, Getters, or Plain Data)
+
+## Lesson 8 - Refine A Composable API with Getter / Setter Computed Props
+
+## Lesson 9 - Extend Composable Functionality with a Config Argument
+
+## Lesson 10 - Extend Composable Functionality with a Config Argument 2
+
+## Lesson 11 - Provide Composable TypeSafety with TypeScript
