@@ -179,38 +179,63 @@ export function useSelectableList(list: string[]) {
 }
 ```
 
-## Lesson 9 - Extend Composable Functionality with a Config Argument
+## Lesson 9 & 10 - Extend Composable Functionality with a Config Argument
 
-- Use a configuration object to provide optional settings for composables, grouping related options together.
-- Define a TypeScript interface for the config object to enable type safety and IDE auto-completion.
-- Mark config properties as optional with `?` so users can provide any or all options.
-- Export the config interface and default config object for reuse and better maintainability.
-- Merge user-provided config with defaults inside the composable to ensure all options are handled, even if not all are provided.
-- For deeply nested config objects, consider using a utility like the `defu` package for deep merging.
+- Use a configuration object to provide optional, flexible settings for composables, improving usability and adaptability.
+- Define and type config objects with TypeScript for type safety, auto-completion, and clear documentation.
+- Mark config properties as optional so users can provide only what they need; always supply sensible defaults internally.
+- Merge user config with defaults inside the composable to ensure robust and predictable behavior.
+- Implement config-driven logic (such as fallbacks or alternative behaviors) to enhance the developer experience and prevent unnecessary errors.
+- Keep the composable API intuitive, focusing on clarity, flexibility, and ease of use for consumers.
+- For deep merging of nested config objects, consider using the `defu` utility package.
 
 **General Example:**
 
 ```ts
 // Define the config interface
-export interface UseExampleConfig {
+export interface UseSomethingConfig {
   fallbackIndex?: number;
   fallbackValue?: any;
 }
 
 // Provide default config values
-export const useExampleConfigDefaults: UseExampleConfig = {
+export const useSomethingConfigDefaults: UseSomethingConfig = {
   fallbackIndex: undefined,
   fallbackValue: undefined,
 };
 
-// Merge user config with defaults
-export function useExample(list: any[], config?: UseExampleConfig) {
-  const _config = { ...useExampleConfigDefaults, ...config };
-  // ...use _config.fallbackIndex, _config.fallbackValue as needed
-  return {};
+// Merge user config with defaults (shallow merge)
+export function useSomething(list: any[], config?: UseSomethingConfig) {
+  const _config = { ...useSomethingConfigDefaults, ...config };
+  // For deep merging, use: import { defu } from 'defu';
+  // const _config = defu(config, useSomethingConfigDefaults)
+
+  function go(index: number) {
+    if (index < 0 || index >= list.length) {
+      if (typeof _config.fallbackIndex !== "undefined") {
+        // Use fallback index if provided
+        // ...
+      } else {
+        throw new Error("Index out of bounds");
+      }
+    }
+    // ...normal logic
+  }
+
+  function setValue(val: any) {
+    const idx = list.indexOf(val);
+    if (idx === -1) {
+      if (typeof _config.fallbackValue !== "undefined") {
+        // Use fallback value if provided
+        // ...
+      } else {
+        throw new Error("Value not found");
+      }
+    }
+    // ...normal logic
+  }
+  return { go, setValue };
 }
 ```
-
-## Lesson 10 - Extend Composable Functionality with a Config Argument 2
 
 ## Lesson 11 - Provide Composable TypeSafety with TypeScript
