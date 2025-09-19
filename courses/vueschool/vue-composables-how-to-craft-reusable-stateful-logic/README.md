@@ -48,6 +48,31 @@ export default {
 
 ## Lesson 2 - Write your first Composable
 
+- By convention, store all composables in a dedicated `composables` folder for better organization.
+- Each composable should be placed in its own file, named after the composable (e.g., `useCycleList.ts`).
+- A composable is simply a function (can use function or arrow function syntax) and should be exported for use in components.
+- Prefixing composable names with `use` is a community convention for predictability and clarity.
+- Using TypeScript (`.ts` files) for composables is recommended for type safety, but not required.
+- You can create VS Code snippets to quickly scaffold new composable files.
+
+**Basic Composable Template Example:**
+
+```ts
+// File: composables/useExample.ts
+export function useExample() {
+  // define reactive state and logic here
+  return {};
+}
+```
+
+```ts
+// Or with arrow function syntax:
+export const useExample = () => {
+  // define reactive state and logic here
+  return {};
+};
+```
+
 ## Lesson 3 - Accept Arguments For Flexible Composables
 
 ## Lesson 4 - Return Data and Functions From Composables
