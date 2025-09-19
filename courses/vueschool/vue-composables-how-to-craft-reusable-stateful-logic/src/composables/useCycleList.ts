@@ -20,10 +20,20 @@ export const useCycleList = (list: Array<any>) => {
     }
   }
 
+  function go(index: number) {
+    if (index >= list.length) {
+      throw new Error(
+        `Cannot go to index ${index}. The list provided to useCycleList is not that long.`
+      );
+    } else {
+      activeIndex.value = index;
+    }
+  }
+
   return {
     state,
     prev,
     next,
-    go: () => {},
+    go,
   };
 };
