@@ -132,6 +132,23 @@ export function useCycleList(list: any[]) {
 
 ## Lesson 7 - Accept Flexible Component Arguments (Reactive, Getters, or Plain Data)
 
+- Composables can be made more flexible by accepting arguments as refs, plain values, or getter functions.
+- Vue provides utility types (like `MaybeRefOrGetter`) and functions (like `toRef`) to normalize arguments, so your composable can work with any of these input types.
+- Use `toRef` to convert any input (ref, getter, or plain value) into a reactive ref inside your composable, simplifying internal logic.
+- The Vue reactivity API offers other helpful utilities (e.g., `toValue`) for normalizing and working with different types of reactive and non-reactive data.
+
+**General Example:**
+
+```ts
+import { toRef, type MaybeRefOrGetter } from "vue";
+
+export function useFlexibleList(list: MaybeRefOrGetter<any[]>) {
+  const normalizedList = toRef(list);
+  // Now you can safely use normalizedList.value inside your composable
+  return { normalizedList };
+}
+```
+
 ## Lesson 8 - Refine A Composable API with Getter / Setter Computed Props
 
 ## Lesson 9 - Extend Composable Functionality with a Config Argument
