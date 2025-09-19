@@ -239,3 +239,22 @@ export function useSomething(list: any[], config?: UseSomethingConfig) {
 ```
 
 ## Lesson 11 - Provide Composable TypeSafety with TypeScript
+
+- Avoid using `any` in composables; prefer generics to ensure type safety and clarity.
+- Use TypeScript utility types like `MaybeRefOrGetter` to support flexible, reactive, and plain arguments.
+- Define and export interfaces for config objects to enable IDE auto-completion and documentation for consumers.
+- Type all composable outputs so that consumers benefit from auto-completion and type checking in their IDE.
+- When working with generics and refs, ensure correct typing to avoid TypeScript errors and maximize type inference.
+- Type-safe composables improve developer experience, reduce bugs, and make code easier to maintain and use.
+
+**Short Example:**
+
+```ts
+import { toRef, type MaybeRefOrGetter, ref, computed } from "vue";
+
+export function useTypedList<T>(list: MaybeRefOrGetter<T[]>) {
+  const normalized = toRef(list) as typeof ref<T[]>;
+  const firstItem = computed(() => normalized.value[0]);
+  return { firstItem };
+}
+```
