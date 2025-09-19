@@ -75,6 +75,22 @@ export const useExample = () => {
 
 ## Lesson 3 - Accept Arguments For Flexible Composables
 
+- Not all composables require arguments, but accepting arguments makes them more flexible and reusable for different use cases.
+- Required arguments are used to provide essential data (e.g., a list or array to cycle through).
+- In TypeScript, you can type arguments for clarity and safety (e.g., `list: any[]` for an array of any type).
+- Optional arguments are often provided as a configuration object, allowing users to customize the composable's behavior.
+- Arguments can be required or optional, depending on the composable's purpose.
+
+**General Example:**
+
+```ts
+// A composable that accepts a required list argument and an optional config
+export function useCycleList(list: any[], config?: { startIndex?: number }) {
+  // logic here
+  return {};
+}
+```
+
 ## Lesson 4 - Return Data and Functions From Composables
 
 ## Lesson 5 - Define Reactive State and Functions within a Composable
