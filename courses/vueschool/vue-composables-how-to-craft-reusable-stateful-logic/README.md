@@ -126,6 +126,10 @@ export function useCycleList(list: any[]) {
 
 ## Lesson 6 - Accept Reactive Composable Arguments
 
+- Composables may need to accept reactive data (e.g., refs) as arguments, not just plain values.
+- TypeScript helps catch type mismatches when passing refs versus plain values to composables.
+- You can type composable arguments to accept a `Ref<T>` for reactive data, but this requires accessing `.value` inside the composable.
+
 ## Lesson 7 - Accept Flexible Component Arguments (Reactive, Getters, or Plain Data)
 
 ## Lesson 8 - Refine A Composable API with Getter / Setter Computed Props
